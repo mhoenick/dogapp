@@ -124,14 +124,16 @@ The self build CNN details can be reviewed in the dog_app.html file. In summary 
 For comparability the VGG16 and ResNet50 use the same top layer architecture. It consist of a global average pooling and a dense layer with the 133 output classes. 
 
 As shown below the ResNet50 model achieved the best dog breed classification accuracy. Hence I moved on with that one.<br>
-Self build CNN:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;~18%<br>
-VGG16 transfer learning:&emsp;&emsp;&emsp;~72%<br>
-ResNet50 transfer learning:&emsp;&emsp;~82%<br>
+Self build CNN:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;~15%<br>
+VGG16 transfer learning:&emsp;&emsp;&emsp;~69%<br>
+ResNet50 transfer learning:&emsp;&emsp;~83%<br>
 
 
 The ResNet50 transfer learning based model training accuracy with up to 99% indicated overfitting. Hence I tried to adapt the top layer for more generalization.
 First I exchanged the global average pooling with a set of dense layers, each followed by a dropout layer but it decreased prediction accuracy.
-Next I used a global average layer followed by a drop out layer before the final layer. This showed a small drop in accuracy. Therefore the global average pooling was exchanged with a max pooling layer and in combination with a dropout of 0.4 that let to an increase of prediction accuracy by ~1% to ~83%.
+Next I used a global average layer followed by a drop out layer before the final layer. This showed a small drop in accuracy. 
+Also a global max pooling layer with or without dropout did not show an improvement. 
+Therefore, finally the global average pooling layer with a prediction accuracy of ~83% was kept.
 
 
 ### Model Evaluation and Validation<a name="model"></a>
