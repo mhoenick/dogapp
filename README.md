@@ -39,10 +39,22 @@ A new top layer is build, that reads these tensors and reduces them via dense la
 
 ### Metrics <a name="metrics"></a>
 
-For dog, human face detection and dog breed classification the output can only be predicted correct or false. Hence it is sufficient to measure the accuracy, which will represent the percentage of correctly predicted images.
+For dog and human face detection the accuracy will be measured. This is sufficient as for testing either only dog images or only human images will be presented. Hence, all or non should be classified correct or false. 
 
-Prediction Accuracy = Number of images classified correctly / Number of presented images * 100
+Accuracy = correctly classified's / total images * 100
 
+
+For the dog breed detection model also the precision and recall will be measured during model training and testing. 
+As shown below in [Data Exploration and Visualization](#explore) the dog breed image data set is a bit imbalanced. Accuracy 
+
+The distribution of the training dog breed images is shown below in [Data Exploration and Visualization](#explore). The set is slightly imbalanced.
+Accuracy considers only total correctly classified over total images and hence is not representative for accuracy of imbalanced data. For imbalanced data it is required to evaluate the accuracy per class and then average. Therefore precision and recall are added for dog breed classification model training. Precision and recall consider correctly classified images per class before averaging.
+
+Precision = Sum of (true positives per class) / 
+			(Sum of (true positives per class) + Sum of (false positives per class))
+
+Recall = Sum of (true positives per class) /
+		( Sum of (true positives per class) + Sum of (false negatives per class))
 
 ### Data Exploration and Visualization<a name="explore"></a>
 
@@ -59,11 +71,14 @@ Dog Images<br>
 &emsp;&emsp;&emsp;&emsp;|...<br>
 &emsp;&emsp;|...<br>
 
-Based on that images with it's according dog breeds are available for training like eg: 
+
+For the test set distribution of the number of dog images per dog breed are shown in the chart below. It shows, that the training set for dog breed classification is imbalanced. At minimum 26 images per breed against a max of 77 for some dog breeds are available. The mean with 50.2 and the median with 50 are pretty equal. Therefore the dataset is not skewed but due to the difference of 51 between min and max images per dog breed the data is imbalanced. 
+
+To see if this imbalance already affects the dog breed classification model, precision and recall are returned next to accuracy during model training. If they are poor, the train data has to be adapted.
 
 <p align="center">
-<img src="dogapp/static/Brittany_02625.jpg" width="100">
-<br>Dog Breed: Brittany
+<b>Chart 1: Train Set: Available Images per Dog Breed</b><br>
+<img src="dogapp/static/DogImages_distrib2.png" width="400">
 </p>
 
 
@@ -121,19 +136,27 @@ For dog breed classification three models were tested. A self build CNN related 
 
 The self build CNN details can be reviewed in the dog_app.html file. In summary it uses three repetitions of two convolutional layer and a max pooling layer, and ends with two dense layers to reduce to the number of required classes.
 
-For comparability the VGG16 and ResNet50 use the same top layer architecture. It consist of a global average pooling and a dense layer with the 133 output classes. 
+For comparability the VGG16 and ResNet50 use the same top layer architecture. It consist of a global average pooling and a dense layer with the 133 output classes.
 
-As shown below the ResNet50 model achieved the best dog breed classification accuracy. Hence I moved on with that one.<br>
-Self build CNN:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;~15%<br>
-VGG16 transfer learning:&emsp;&emsp;&emsp;~69%<br>
-ResNet50 transfer learning:&emsp;&emsp;~83%<br>
+The table below shows the results of five runs for each of the compared models. Yellow highlights the max values achieved from five runs per model. Green highlights the max average value of all models. The ResNet50 model achieved the best dog breed classification and is robust, hence I moved on with it.
+
+<p align="center">
+<b>Table 1: Model Performances</b><br>
+<img src="dogapp/static/ModelEval1.png" height="400">
+</p>
 
 
 The ResNet50 transfer learning based model training accuracy with up to 99% indicated overfitting. Hence I tried to adapt the top layer for more generalization.
-First I exchanged the global average pooling with a set of dense layers, each followed by a dropout layer but it decreased prediction accuracy.
-Next I used a global average layer followed by a drop out layer before the final layer. This showed a small drop in accuracy. 
-Also a global max pooling layer with or without dropout did not show an improvement. 
-Therefore, finally the global average pooling layer with a prediction accuracy of ~83% was kept.
+
+The different adaption approaches results are shown in the table below. The first model is the ResNet50 with the global average pooling and dense (133) as top layer from above.
+First I exchanged the top layer with a set of dense layers, each followed by a dropout layer but it decreased prediction accuracy.
+Next I used a global max pooling instead of global average pooling, which resulted in a similar performance to the first model but still lower.
+Next I combined the global average pooling layer with a dropout layer with different dropout probabilities. That showed no performance improvement as well, hence the first model with a prediction accuracy of ~83% was kept.
+
+<p align="center">
+<b>Table 2: ResNet50 Top Layer Refinement - Performances</b><br>
+<img src="dogapp/static/ModelEval2.png" height="700">
+</p>
 
 
 ### Model Evaluation and Validation<a name="model"></a>
@@ -145,7 +168,11 @@ Dog detector:
 The dog detection based on ResNet50 model worked really good. From 100 test images it detected 100% with a misclassification rate of 0%. For more images it still achieved ~99% with a misclassification of only ~1%. Hence it is used for detecting all dogs before the image is scanned for human faces and should therefore avoid misclassification of dogs as humans.
 
 Dog breed prediction:
-As stated in [Refinement](#refinement) the final ResNet50 base model + adapted top layer achieves an accuracy of ~83% for dog breed classification on the test set.
+The final model selected for dog breed prediction is the ResNet50 base model plus a global average pooling layer and a dense layer with the according 133 output classes. Trial 4 of it (first model) in table 2 is used. 
+As shown in table 2 above the choosen model achieved the best average accuracy, -precision and -recall on the test set of all tested model variations.
+On the test and validation set the average precision and recall are all over 80% and close to the accuracy. For the equally weighted averaged precision and recall the data imbalance could even out, hence for the finally choosen model the weighted precision with 86.5% and the weighted recall with 84.5% were calculated to cover imbalance. These values are in line with the overall performance of the model hence the lower number of images for some dog breeds are still enough to achieve reasonable predictions.
+
+From the five runs performed and shown in table 2 for the first model it can be seen that the model is robust as all five run performances are close to each other. 
 
 
 ### Justification<a name="justification"></a>

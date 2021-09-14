@@ -14119,6 +14119,184 @@ There are 836 test dog images.
 
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Evaluate data set splitting</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_files</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">train_files</span><span class="p">,</span> <span class="n">valid_files</span><span class="p">,</span> <span class="n">test_files</span><span class="p">])))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">valid_files</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">train_files</span><span class="p">,</span> <span class="n">valid_files</span><span class="p">,</span> <span class="n">test_files</span><span class="p">])))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_files</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">train_files</span><span class="p">,</span> <span class="n">valid_files</span><span class="p">,</span> <span class="n">test_files</span><span class="p">])))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>0.7999042030894503
+0.09998802538618129
+0.10010777152436834
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get number of dog images per breed / class</span>
+<span class="n">path_l1</span> <span class="o">=</span> <span class="s2">&quot;dogImages/train&quot;</span>
+<span class="n">nb_imgs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">path_l2</span> <span class="ow">in</span> <span class="n">glob</span><span class="p">(</span><span class="n">path_l1</span> <span class="o">+</span> <span class="s2">&quot;/*&quot;</span><span class="p">):</span>
+        <span class="c1">#print(glob(path_l2 + &#39;/*&#39;))</span>
+        <span class="n">nb_imgs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="n">path_l2</span> <span class="o">+</span> <span class="s2">&quot;/*&quot;</span><span class="p">)))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># plot distribution of dog images per breed / class</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nb_imgs</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">50.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Train Image Set: Available Images per Dog Breed&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of Images&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Dog Breeds&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">52</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\mu=50.2$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">52</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\sigma=11.8$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>Text(52, 18, &#39;$\\sigma=11.8$&#39;)</pre>
+</div>
+
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># statistics of images per dog breed distribution</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nb_imgs</span><span class="p">),</span> <span class="mi">50</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nb_imgs</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nb_imgs</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nb_imgs</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nb_imgs</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>50.0
+50.225563909774436
+11.819199711692113
+77
+26
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14131,7 +14309,7 @@ There are 836 test dog images.
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>                
@@ -14218,7 +14396,7 @@ There are 836 test dog images.
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># returns &quot;True&quot; if face is detected in image stored at img_path</span>
@@ -14249,7 +14427,7 @@ There are 836 test dog images.
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">human_files_short</span> <span class="o">=</span> <span class="n">human_files</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
@@ -14316,7 +14494,7 @@ Performance dogs (human detected): 12.0%
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## (Optional) TODO: Report the performance of another  </span>
@@ -14340,7 +14518,7 @@ Performance dogs (human detected): 12.0%
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.applications.resnet50</span> <span class="kn">import</span> <span class="n">ResNet50</span>
@@ -14373,7 +14551,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.preprocessing</span> <span class="kn">import</span> <span class="n">image</span>                  
@@ -14408,7 +14586,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.applications.resnet50</span> <span class="kn">import</span> <span class="n">preprocess_input</span><span class="p">,</span> <span class="n">decode_predictions</span>
@@ -14434,7 +14612,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### returns &quot;True&quot; if a dog is detected in the image stored at img_path</span>
@@ -14462,7 +14640,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Test the performance of the dog_detector function</span>
@@ -14574,7 +14752,7 @@ Performance dogs (dog detected): 100.0%
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFile</span>                            
@@ -14603,9 +14781,9 @@ Performance dogs (dog detected): 100.0%
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>100%|██████████| 6680/6680 [00:40&lt;00:00, 166.79it/s]
-100%|██████████| 835/835 [00:05&lt;00:00, 151.45it/s]
-100%|██████████| 836/836 [00:05&lt;00:00, 166.84it/s]
+<pre>100%|██████████| 6680/6680 [00:35&lt;00:00, 188.64it/s]
+100%|██████████| 835/835 [00:04&lt;00:00, 189.04it/s]
+100%|██████████| 836/836 [00:04&lt;00:00, 185.55it/s]
 </pre>
 </div>
 </div>
@@ -14649,7 +14827,7 @@ Performance dogs (dog detected): 100.0%
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[61]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">GlobalAveragePooling2D</span><span class="p">,</span> <span class="n">GlobalMaxPooling2D</span>
@@ -14692,31 +14870,31 @@ Performance dogs (dog detected): 100.0%
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Model: &#34;sequential&#34;
+<pre>Model: &#34;sequential_4&#34;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d (Conv2D)              (None, 224, 224, 32)      416       
+conv2d_24 (Conv2D)           (None, 224, 224, 32)      416       
 _________________________________________________________________
-conv2d_1 (Conv2D)            (None, 224, 224, 32)      4128      
+conv2d_25 (Conv2D)           (None, 224, 224, 32)      4128      
 _________________________________________________________________
-max_pooling2d (MaxPooling2D) (None, 112, 112, 32)      0         
+max_pooling2d_8 (MaxPooling2 (None, 112, 112, 32)      0         
 _________________________________________________________________
-conv2d_2 (Conv2D)            (None, 112, 112, 64)      8256      
+conv2d_26 (Conv2D)           (None, 112, 112, 64)      8256      
 _________________________________________________________________
-conv2d_3 (Conv2D)            (None, 112, 112, 64)      16448     
+conv2d_27 (Conv2D)           (None, 112, 112, 64)      16448     
 _________________________________________________________________
-max_pooling2d_1 (MaxPooling2 (None, 56, 56, 64)        0         
+max_pooling2d_9 (MaxPooling2 (None, 56, 56, 64)        0         
 _________________________________________________________________
-conv2d_4 (Conv2D)            (None, 56, 56, 128)       32896     
+conv2d_28 (Conv2D)           (None, 56, 56, 128)       32896     
 _________________________________________________________________
-conv2d_5 (Conv2D)            (None, 56, 56, 128)       65664     
+conv2d_29 (Conv2D)           (None, 56, 56, 128)       65664     
 _________________________________________________________________
-global_max_pooling2d (Global (None, 128)               0         
+global_max_pooling2d_4 (Glob (None, 128)               0         
 _________________________________________________________________
-dense (Dense)                (None, 2056)              265224    
+dense_8 (Dense)              (None, 2056)              265224    
 _________________________________________________________________
-dense_1 (Dense)              (None, 133)               273581    
+dense_9 (Dense)              (None, 133)               273581    
 =================================================================
 Total params: 666,613
 Trainable params: 666,613
@@ -14738,10 +14916,10 @@ _________________________________________________________________
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[62]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;Precision&#39;</span><span class="p">,</span> <span class="s1">&#39;Recall&#39;</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -14759,7 +14937,7 @@ _________________________________________________________________
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[63]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span>  
@@ -14796,85 +14974,85 @@ _________________________________________________________________
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Epoch 1/20
-334/334 [==============================] - 61s 167ms/step - loss: 4.8830 - accuracy: 0.0099 - val_loss: 4.8455 - val_accuracy: 0.0192
+334/334 [==============================] - 51s 149ms/step - loss: 4.8830 - accuracy: 0.0081 - precision: 0.0000e+00 - recall: 0.0000e+00 - val_loss: 4.8709 - val_accuracy: 0.0108 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00
 
-Epoch 00001: val_loss improved from inf to 4.84552, saving model to saved_models\weights.best.from_scratch.hdf5
+Epoch 00001: val_loss improved from inf to 4.87093, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 2/20
-334/334 [==============================] - 55s 165ms/step - loss: 4.7795 - accuracy: 0.0162 - val_loss: 4.7207 - val_accuracy: 0.0180
+334/334 [==============================] - 50s 150ms/step - loss: 4.8728 - accuracy: 0.0102 - precision: 0.0000e+00 - recall: 0.0000e+00 - val_loss: 4.8699 - val_accuracy: 0.0108 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00
 
-Epoch 00002: val_loss improved from 4.84552 to 4.72065, saving model to saved_models\weights.best.from_scratch.hdf5
+Epoch 00002: val_loss improved from 4.87093 to 4.86994, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 3/20
-334/334 [==============================] - 55s 164ms/step - loss: 4.7098 - accuracy: 0.0174 - val_loss: 4.7420 - val_accuracy: 0.0228
+334/334 [==============================] - 54s 162ms/step - loss: 4.8689 - accuracy: 0.0117 - precision: 0.0000e+00 - recall: 0.0000e+00 - val_loss: 4.8651 - val_accuracy: 0.0144 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00
 
-Epoch 00003: val_loss did not improve from 4.72065
+Epoch 00003: val_loss improved from 4.86994 to 4.86515, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 4/20
-334/334 [==============================] - 55s 164ms/step - loss: 4.6559 - accuracy: 0.0217 - val_loss: 4.6129 - val_accuracy: 0.0168
+334/334 [==============================] - 54s 163ms/step - loss: 4.8515 - accuracy: 0.0157 - precision: 0.0000e+00 - recall: 0.0000e+00 - val_loss: 4.8322 - val_accuracy: 0.0144 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00
 
-Epoch 00004: val_loss improved from 4.72065 to 4.61295, saving model to saved_models\weights.best.from_scratch.hdf5
+Epoch 00004: val_loss improved from 4.86515 to 4.83220, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 5/20
-334/334 [==============================] - 55s 165ms/step - loss: 4.5862 - accuracy: 0.0287 - val_loss: 4.5330 - val_accuracy: 0.0335
+334/334 [==============================] - 55s 163ms/step - loss: 4.8210 - accuracy: 0.0187 - precision: 0.0000e+00 - recall: 0.0000e+00 - val_loss: 4.8175 - val_accuracy: 0.0204 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00
 
-Epoch 00005: val_loss improved from 4.61295 to 4.53301, saving model to saved_models\weights.best.from_scratch.hdf5
+Epoch 00005: val_loss improved from 4.83220 to 4.81753, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 6/20
-334/334 [==============================] - 55s 164ms/step - loss: 4.4746 - accuracy: 0.0404 - val_loss: 4.4184 - val_accuracy: 0.0503
+334/334 [==============================] - 55s 163ms/step - loss: 4.7867 - accuracy: 0.0172 - precision: 0.0000e+00 - recall: 0.0000e+00 - val_loss: 4.7580 - val_accuracy: 0.0156 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00
 
-Epoch 00006: val_loss improved from 4.53301 to 4.41835, saving model to saved_models\weights.best.from_scratch.hdf5
+Epoch 00006: val_loss improved from 4.81753 to 4.75803, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 7/20
-334/334 [==============================] - 55s 164ms/step - loss: 4.2817 - accuracy: 0.0524 - val_loss: 4.4251 - val_accuracy: 0.0527
+334/334 [==============================] - 55s 164ms/step - loss: 4.7411 - accuracy: 0.0190 - precision: 0.0000e+00 - recall: 0.0000e+00 - val_loss: 4.7271 - val_accuracy: 0.0192 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00
 
-Epoch 00007: val_loss did not improve from 4.41835
+Epoch 00007: val_loss improved from 4.75803 to 4.72713, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 8/20
-334/334 [==============================] - 55s 164ms/step - loss: 4.1332 - accuracy: 0.0645 - val_loss: 4.1924 - val_accuracy: 0.0743
+334/334 [==============================] - 55s 164ms/step - loss: 4.6589 - accuracy: 0.0284 - precision: 0.0000e+00 - recall: 0.0000e+00 - val_loss: 4.5724 - val_accuracy: 0.0359 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00
 
-Epoch 00008: val_loss improved from 4.41835 to 4.19237, saving model to saved_models\weights.best.from_scratch.hdf5
+Epoch 00008: val_loss improved from 4.72713 to 4.57236, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 9/20
-334/334 [==============================] - 55s 165ms/step - loss: 3.9895 - accuracy: 0.0816 - val_loss: 4.0449 - val_accuracy: 0.0898
+334/334 [==============================] - 55s 165ms/step - loss: 4.4969 - accuracy: 0.0404 - precision: 0.0000e+00 - recall: 0.0000e+00 - val_loss: 4.4316 - val_accuracy: 0.0359 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00
 
-Epoch 00009: val_loss improved from 4.19237 to 4.04489, saving model to saved_models\weights.best.from_scratch.hdf5
+Epoch 00009: val_loss improved from 4.57236 to 4.43156, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 10/20
-334/334 [==============================] - 55s 164ms/step - loss: 3.8481 - accuracy: 0.0973 - val_loss: 4.0270 - val_accuracy: 0.0754
+334/334 [==============================] - 55s 165ms/step - loss: 4.2755 - accuracy: 0.0575 - precision: 1.0000 - recall: 4.4910e-04 - val_loss: 4.3405 - val_accuracy: 0.0527 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00
 
-Epoch 00010: val_loss improved from 4.04489 to 4.02695, saving model to saved_models\weights.best.from_scratch.hdf5
+Epoch 00010: val_loss improved from 4.43156 to 4.34052, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 11/20
-334/334 [==============================] - 55s 165ms/step - loss: 3.6935 - accuracy: 0.1222 - val_loss: 3.8559 - val_accuracy: 0.1174
+334/334 [==============================] - 55s 165ms/step - loss: 4.0632 - accuracy: 0.0807 - precision: 0.7000 - recall: 0.0021 - val_loss: 4.1401 - val_accuracy: 0.0707 - val_precision: 0.5000 - val_recall: 0.0024
 
-Epoch 00011: val_loss improved from 4.02695 to 3.85594, saving model to saved_models\weights.best.from_scratch.hdf5
+Epoch 00011: val_loss improved from 4.34052 to 4.14013, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 12/20
-334/334 [==============================] - 55s 164ms/step - loss: 3.5526 - accuracy: 0.1434 - val_loss: 3.7699 - val_accuracy: 0.1150
+334/334 [==============================] - 55s 165ms/step - loss: 3.8817 - accuracy: 0.1061 - precision: 0.5965 - recall: 0.0051 - val_loss: 4.1406 - val_accuracy: 0.0647 - val_precision: 0.5000 - val_recall: 0.0012
 
-Epoch 00012: val_loss improved from 3.85594 to 3.76986, saving model to saved_models\weights.best.from_scratch.hdf5
+Epoch 00012: val_loss did not improve from 4.14013
 Epoch 13/20
-334/334 [==============================] - 55s 164ms/step - loss: 3.4288 - accuracy: 0.1635 - val_loss: 3.8191 - val_accuracy: 0.1222
+334/334 [==============================] - 55s 165ms/step - loss: 3.7150 - accuracy: 0.1296 - precision: 0.6848 - recall: 0.0094 - val_loss: 4.2068 - val_accuracy: 0.0838 - val_precision: 0.2632 - val_recall: 0.0060
 
-Epoch 00013: val_loss did not improve from 3.76986
+Epoch 00013: val_loss did not improve from 4.14013
 Epoch 14/20
-334/334 [==============================] - 55s 164ms/step - loss: 3.3050 - accuracy: 0.1807 - val_loss: 3.8141 - val_accuracy: 0.1329
+334/334 [==============================] - 55s 165ms/step - loss: 3.5832 - accuracy: 0.1472 - precision: 0.6093 - recall: 0.0138 - val_loss: 3.8278 - val_accuracy: 0.1066 - val_precision: 0.3077 - val_recall: 0.0048
 
-Epoch 00014: val_loss did not improve from 3.76986
+Epoch 00014: val_loss improved from 4.14013 to 3.82782, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 15/20
-334/334 [==============================] - 55s 164ms/step - loss: 3.1612 - accuracy: 0.2132 - val_loss: 3.8617 - val_accuracy: 0.1341
+334/334 [==============================] - 55s 165ms/step - loss: 3.4437 - accuracy: 0.1689 - precision: 0.6500 - recall: 0.0234 - val_loss: 3.8432 - val_accuracy: 0.1138 - val_precision: 0.3684 - val_recall: 0.0084
 
-Epoch 00015: val_loss did not improve from 3.76986
+Epoch 00015: val_loss did not improve from 3.82782
 Epoch 16/20
-334/334 [==============================] - 55s 163ms/step - loss: 3.0392 - accuracy: 0.2284 - val_loss: 3.7984 - val_accuracy: 0.1281
+334/334 [==============================] - 55s 165ms/step - loss: 3.2999 - accuracy: 0.1850 - precision: 0.6598 - recall: 0.0334 - val_loss: 3.9911 - val_accuracy: 0.1054 - val_precision: 0.2203 - val_recall: 0.0156
 
-Epoch 00016: val_loss did not improve from 3.76986
+Epoch 00016: val_loss did not improve from 3.82782
 Epoch 17/20
-334/334 [==============================] - 54s 162ms/step - loss: 2.9260 - accuracy: 0.2528 - val_loss: 3.8423 - val_accuracy: 0.1425
+334/334 [==============================] - 55s 165ms/step - loss: 3.1593 - accuracy: 0.2106 - precision: 0.6412 - recall: 0.0415 - val_loss: 3.8092 - val_accuracy: 0.1174 - val_precision: 0.4722 - val_recall: 0.0204
 
-Epoch 00017: val_loss did not improve from 3.76986
+Epoch 00017: val_loss improved from 3.82782 to 3.80917, saving model to saved_models\weights.best.from_scratch.hdf5
 Epoch 18/20
-334/334 [==============================] - 54s 162ms/step - loss: 2.8113 - accuracy: 0.2716 - val_loss: 3.6535 - val_accuracy: 0.1605
+334/334 [==============================] - 55s 165ms/step - loss: 3.0187 - accuracy: 0.2397 - precision: 0.6762 - recall: 0.0600 - val_loss: 3.8809 - val_accuracy: 0.1222 - val_precision: 0.4390 - val_recall: 0.0216
 
-Epoch 00018: val_loss improved from 3.76986 to 3.65347, saving model to saved_models\weights.best.from_scratch.hdf5
+Epoch 00018: val_loss did not improve from 3.80917
 Epoch 19/20
-334/334 [==============================] - 54s 162ms/step - loss: 2.6758 - accuracy: 0.3085 - val_loss: 3.8114 - val_accuracy: 0.1593
+334/334 [==============================] - 55s 165ms/step - loss: 2.8868 - accuracy: 0.2639 - precision: 0.7005 - recall: 0.0784 - val_loss: 3.9029 - val_accuracy: 0.1521 - val_precision: 0.3839 - val_recall: 0.0515
 
-Epoch 00019: val_loss did not improve from 3.65347
+Epoch 00019: val_loss did not improve from 3.80917
 Epoch 20/20
-334/334 [==============================] - 54s 163ms/step - loss: 2.5456 - accuracy: 0.3226 - val_loss: 3.6967 - val_accuracy: 0.1497
+334/334 [==============================] - 55s 165ms/step - loss: 2.7645 - accuracy: 0.2885 - precision: 0.6990 - recall: 0.0918 - val_loss: 3.8004 - val_accuracy: 0.1629 - val_precision: 0.4227 - val_recall: 0.0491
 
-Epoch 00020: val_loss did not improve from 3.65347
+Epoch 00020: val_loss improved from 3.80917 to 3.80041, saving model to saved_models\weights.best.from_scratch.hdf5
 </pre>
 </div>
 </div>
@@ -14882,13 +15060,13 @@ Epoch 00020: val_loss did not improve from 3.65347
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[63]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;tensorflow.python.keras.callbacks.History at 0x26a8580eca0&gt;</pre>
+<pre>&lt;tensorflow.python.keras.callbacks.History at 0x2968a5afa30&gt;</pre>
 </div>
 
 </div>
@@ -14905,7 +15083,7 @@ Epoch 00020: val_loss did not improve from 3.65347
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[64]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;saved_models/weights.best.from_scratch.hdf5&#39;</span><span class="p">)</span>
@@ -14925,7 +15103,7 @@ Epoch 00020: val_loss did not improve from 3.65347
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[65]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get index of predicted dog breed for each image in test set</span>
@@ -14953,7 +15131,62 @@ Epoch 00020: val_loss did not improve from 3.65347
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Test accuracy: 15.7895%
+<pre>Test accuracy: 17.7033%
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[66]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">recall_score</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[67]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Test accuracy: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dog_breed_predictions</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test precision: </span><span class="si">{</span><span class="n">precision_score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dog_breed_predictions</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test recall: </span><span class="si">{</span><span class="n">recall_score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dog_breed_predictions</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Test accuracy: 0.17703349282296652
+Test precision: 0.18312648850165916
+Test recall: 0.16235230934479053
 </pre>
 </div>
 </div>
@@ -14973,7 +15206,7 @@ Epoch 00020: val_loss did not improve from 3.65347
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[68]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bottleneck_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;bottleneck_features/DogVGG16Data.npz&#39;</span><span class="p">)</span>
@@ -14996,7 +15229,7 @@ Epoch 00020: val_loss did not improve from 3.65347
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[96]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">VGG16_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
@@ -15023,13 +15256,13 @@ Epoch 00020: val_loss did not improve from 3.65347
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Model: &#34;sequential_1&#34;
+<pre>Model: &#34;sequential_9&#34;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-global_average_pooling2d (Gl (None, 512)               0         
+global_average_pooling2d_4 ( (None, 512)               0         
 _________________________________________________________________
-dense_2 (Dense)              (None, 133)               68229     
+dense_14 (Dense)             (None, 133)               68229     
 =================================================================
 Total params: 68,229
 Trainable params: 68,229
@@ -15051,10 +15284,10 @@ _________________________________________________________________
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[97]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">VGG16_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">VGG16_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;Precision&#39;</span><span class="p">,</span> <span class="s1">&#39;Recall&#39;</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -15070,7 +15303,7 @@ _________________________________________________________________
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[98]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">checkpointer</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;saved_models/weights.best.VGG16.hdf5&#39;</span><span class="p">,</span> 
@@ -15099,85 +15332,85 @@ _________________________________________________________________
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Epoch 1/20
-334/334 [==============================] - 2s 4ms/step - loss: 7.7424 - accuracy: 0.2332 - val_loss: 3.4176 - val_accuracy: 0.4515
+334/334 [==============================] - 2s 6ms/step - loss: 7.8221 - accuracy: 0.2428 - precision: 0.2736 - recall: 0.2240 - val_loss: 3.4616 - val_accuracy: 0.4611 - val_precision: 0.4932 - val_recall: 0.4311
 
-Epoch 00001: val_loss improved from inf to 3.41762, saving model to saved_models\weights.best.VGG16.hdf5
+Epoch 00001: val_loss improved from inf to 3.46160, saving model to saved_models\weights.best.VGG16.hdf5
 Epoch 2/20
-334/334 [==============================] - 1s 3ms/step - loss: 2.1442 - accuracy: 0.5985 - val_loss: 2.3137 - val_accuracy: 0.5904
+334/334 [==============================] - 2s 5ms/step - loss: 2.1913 - accuracy: 0.6006 - precision: 0.6348 - recall: 0.5813 - val_loss: 2.5350 - val_accuracy: 0.5760 - val_precision: 0.6081 - val_recall: 0.5593
 
-Epoch 00002: val_loss improved from 3.41762 to 2.31371, saving model to saved_models\weights.best.VGG16.hdf5
+Epoch 00002: val_loss improved from 3.46160 to 2.53498, saving model to saved_models\weights.best.VGG16.hdf5
 Epoch 3/20
-334/334 [==============================] - 1s 3ms/step - loss: 1.2000 - accuracy: 0.7413 - val_loss: 2.1090 - val_accuracy: 0.6263
+334/334 [==============================] - 2s 5ms/step - loss: 1.2441 - accuracy: 0.7427 - precision: 0.7682 - recall: 0.7292 - val_loss: 2.1331 - val_accuracy: 0.6431 - val_precision: 0.6650 - val_recall: 0.6323
 
-Epoch 00003: val_loss improved from 2.31371 to 2.10904, saving model to saved_models\weights.best.VGG16.hdf5
+Epoch 00003: val_loss improved from 2.53498 to 2.13306, saving model to saved_models\weights.best.VGG16.hdf5
 Epoch 4/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.7894 - accuracy: 0.8157 - val_loss: 1.8657 - val_accuracy: 0.6611
+334/334 [==============================] - 2s 5ms/step - loss: 0.8235 - accuracy: 0.8135 - precision: 0.8313 - recall: 0.8033 - val_loss: 2.1113 - val_accuracy: 0.6503 - val_precision: 0.6667 - val_recall: 0.6419
 
-Epoch 00004: val_loss improved from 2.10904 to 1.86569, saving model to saved_models\weights.best.VGG16.hdf5
+Epoch 00004: val_loss improved from 2.13306 to 2.11125, saving model to saved_models\weights.best.VGG16.hdf5
 Epoch 5/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.5490 - accuracy: 0.8675 - val_loss: 1.7936 - val_accuracy: 0.6958
+334/334 [==============================] - 2s 5ms/step - loss: 0.5605 - accuracy: 0.8588 - precision: 0.8737 - recall: 0.8513 - val_loss: 2.0100 - val_accuracy: 0.6802 - val_precision: 0.7056 - val_recall: 0.6659
 
-Epoch 00005: val_loss improved from 1.86569 to 1.79363, saving model to saved_models\weights.best.VGG16.hdf5
+Epoch 00005: val_loss improved from 2.11125 to 2.00999, saving model to saved_models\weights.best.VGG16.hdf5
 Epoch 6/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.4117 - accuracy: 0.8954 - val_loss: 1.9649 - val_accuracy: 0.6743
+334/334 [==============================] - 2s 5ms/step - loss: 0.4236 - accuracy: 0.8859 - precision: 0.8968 - recall: 0.8790 - val_loss: 1.9990 - val_accuracy: 0.6862 - val_precision: 0.7041 - val_recall: 0.6838
 
-Epoch 00006: val_loss did not improve from 1.79363
+Epoch 00006: val_loss improved from 2.00999 to 1.99905, saving model to saved_models\weights.best.VGG16.hdf5
 Epoch 7/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.3124 - accuracy: 0.9160 - val_loss: 1.7406 - val_accuracy: 0.7030
+334/334 [==============================] - 2s 5ms/step - loss: 0.3013 - accuracy: 0.9172 - precision: 0.9243 - recall: 0.9121 - val_loss: 1.9609 - val_accuracy: 0.6994 - val_precision: 0.7071 - val_recall: 0.6910
 
-Epoch 00007: val_loss improved from 1.79363 to 1.74061, saving model to saved_models\weights.best.VGG16.hdf5
+Epoch 00007: val_loss improved from 1.99905 to 1.96091, saving model to saved_models\weights.best.VGG16.hdf5
 Epoch 8/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.2218 - accuracy: 0.9361 - val_loss: 1.8771 - val_accuracy: 0.6970
+334/334 [==============================] - 2s 5ms/step - loss: 0.2185 - accuracy: 0.9371 - precision: 0.9433 - recall: 0.9319 - val_loss: 1.8366 - val_accuracy: 0.7054 - val_precision: 0.7153 - val_recall: 0.6982
 
-Epoch 00008: val_loss did not improve from 1.74061
+Epoch 00008: val_loss improved from 1.96091 to 1.83658, saving model to saved_models\weights.best.VGG16.hdf5
 Epoch 9/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.1772 - accuracy: 0.9475 - val_loss: 1.7809 - val_accuracy: 0.7198
+334/334 [==============================] - 2s 5ms/step - loss: 0.1736 - accuracy: 0.9476 - precision: 0.9525 - recall: 0.9455 - val_loss: 1.9217 - val_accuracy: 0.6982 - val_precision: 0.7129 - val_recall: 0.6958
 
-Epoch 00009: val_loss did not improve from 1.74061
+Epoch 00009: val_loss did not improve from 1.83658
 Epoch 10/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.1254 - accuracy: 0.9617 - val_loss: 1.8772 - val_accuracy: 0.7246
+334/334 [==============================] - 2s 5ms/step - loss: 0.1302 - accuracy: 0.9617 - precision: 0.9646 - recall: 0.9582 - val_loss: 1.9600 - val_accuracy: 0.7126 - val_precision: 0.7227 - val_recall: 0.7054
 
-Epoch 00010: val_loss did not improve from 1.74061
+Epoch 00010: val_loss did not improve from 1.83658
 Epoch 11/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.1059 - accuracy: 0.9657 - val_loss: 1.8410 - val_accuracy: 0.7198
+334/334 [==============================] - 2s 5ms/step - loss: 0.1125 - accuracy: 0.9695 - precision: 0.9709 - recall: 0.9677 - val_loss: 1.9355 - val_accuracy: 0.7138 - val_precision: 0.7282 - val_recall: 0.7090
 
-Epoch 00011: val_loss did not improve from 1.74061
+Epoch 00011: val_loss did not improve from 1.83658
 Epoch 12/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.0897 - accuracy: 0.9749 - val_loss: 1.8451 - val_accuracy: 0.7353
+334/334 [==============================] - 2s 5ms/step - loss: 0.0770 - accuracy: 0.9754 - precision: 0.9763 - recall: 0.9747 - val_loss: 1.9047 - val_accuracy: 0.7102 - val_precision: 0.7239 - val_recall: 0.7066
 
-Epoch 00012: val_loss did not improve from 1.74061
+Epoch 00012: val_loss did not improve from 1.83658
 Epoch 13/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.0658 - accuracy: 0.9799 - val_loss: 2.0354 - val_accuracy: 0.7317
+334/334 [==============================] - 2s 5ms/step - loss: 0.0607 - accuracy: 0.9817 - precision: 0.9825 - recall: 0.9811 - val_loss: 1.9012 - val_accuracy: 0.7078 - val_precision: 0.7215 - val_recall: 0.7042
 
-Epoch 00013: val_loss did not improve from 1.74061
+Epoch 00013: val_loss did not improve from 1.83658
 Epoch 14/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.0528 - accuracy: 0.9841 - val_loss: 1.9419 - val_accuracy: 0.7425
+334/334 [==============================] - 2s 5ms/step - loss: 0.0519 - accuracy: 0.9841 - precision: 0.9846 - recall: 0.9840 - val_loss: 2.0756 - val_accuracy: 0.7030 - val_precision: 0.7112 - val_recall: 0.7018
 
-Epoch 00014: val_loss did not improve from 1.74061
+Epoch 00014: val_loss did not improve from 1.83658
 Epoch 15/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.0433 - accuracy: 0.9883 - val_loss: 2.0608 - val_accuracy: 0.7281
+334/334 [==============================] - 2s 5ms/step - loss: 0.0386 - accuracy: 0.9876 - precision: 0.9879 - recall: 0.9871 - val_loss: 2.1356 - val_accuracy: 0.7078 - val_precision: 0.7219 - val_recall: 0.6994
 
-Epoch 00015: val_loss did not improve from 1.74061
+Epoch 00015: val_loss did not improve from 1.83658
 Epoch 16/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.0374 - accuracy: 0.9894 - val_loss: 1.9445 - val_accuracy: 0.7497
+334/334 [==============================] - 2s 5ms/step - loss: 0.0384 - accuracy: 0.9894 - precision: 0.9897 - recall: 0.9888 - val_loss: 2.1164 - val_accuracy: 0.7066 - val_precision: 0.7153 - val_recall: 0.7042
 
-Epoch 00016: val_loss did not improve from 1.74061
+Epoch 00016: val_loss did not improve from 1.83658
 Epoch 17/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.0333 - accuracy: 0.9906 - val_loss: 2.0561 - val_accuracy: 0.7461
+334/334 [==============================] - 2s 5ms/step - loss: 0.0346 - accuracy: 0.9880 - precision: 0.9888 - recall: 0.9879 - val_loss: 2.1343 - val_accuracy: 0.7329 - val_precision: 0.7421 - val_recall: 0.7269
 
-Epoch 00017: val_loss did not improve from 1.74061
+Epoch 00017: val_loss did not improve from 1.83658
 Epoch 18/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.0297 - accuracy: 0.9921 - val_loss: 2.0629 - val_accuracy: 0.7425
+334/334 [==============================] - 2s 5ms/step - loss: 0.0248 - accuracy: 0.9922 - precision: 0.9922 - recall: 0.9921 - val_loss: 2.0085 - val_accuracy: 0.7257 - val_precision: 0.7305 - val_recall: 0.7174
 
-Epoch 00018: val_loss did not improve from 1.74061
+Epoch 00018: val_loss did not improve from 1.83658
 Epoch 19/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.0232 - accuracy: 0.9933 - val_loss: 2.0474 - val_accuracy: 0.7533
+334/334 [==============================] - 2s 5ms/step - loss: 0.0226 - accuracy: 0.9934 - precision: 0.9934 - recall: 0.9934 - val_loss: 2.2509 - val_accuracy: 0.7329 - val_precision: 0.7397 - val_recall: 0.7281
 
-Epoch 00019: val_loss did not improve from 1.74061
+Epoch 00019: val_loss did not improve from 1.83658
 Epoch 20/20
-334/334 [==============================] - 1s 3ms/step - loss: 0.0220 - accuracy: 0.9931 - val_loss: 2.1547 - val_accuracy: 0.7425
+334/334 [==============================] - 2s 5ms/step - loss: 0.0188 - accuracy: 0.9940 - precision: 0.9942 - recall: 0.9940 - val_loss: 2.2218 - val_accuracy: 0.7138 - val_precision: 0.7179 - val_recall: 0.7102
 
-Epoch 00020: val_loss did not improve from 1.74061
+Epoch 00020: val_loss did not improve from 1.83658
 </pre>
 </div>
 </div>
@@ -15185,13 +15418,13 @@ Epoch 00020: val_loss did not improve from 1.74061
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[98]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;tensorflow.python.keras.callbacks.History at 0x26aa2398ca0&gt;</pre>
+<pre>&lt;tensorflow.python.keras.callbacks.History at 0x2968fd7ea90&gt;</pre>
 </div>
 
 </div>
@@ -15208,7 +15441,7 @@ Epoch 00020: val_loss did not improve from 1.74061
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[99]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">VGG16_model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;saved_models/weights.best.VGG16.hdf5&#39;</span><span class="p">)</span>
@@ -15228,7 +15461,7 @@ Epoch 00020: val_loss did not improve from 1.74061
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[100]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get index of predicted dog breed for each image in test set</span>
@@ -15256,7 +15489,46 @@ Epoch 00020: val_loss did not improve from 1.74061
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Test accuracy: 69.0191%
+<pre>Test accuracy: 71.1722%
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[101]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Test accuracy: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">VGG16_predictions</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test precision: </span><span class="si">{</span><span class="n">precision_score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">VGG16_predictions</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test recall: </span><span class="si">{</span><span class="n">recall_score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">VGG16_predictions</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Test accuracy: 0.7117224880382775
+Test precision: 0.7359329058577179
+Test recall: 0.7012232963360784
 </pre>
 </div>
 </div>
@@ -15273,7 +15545,7 @@ Epoch 00020: val_loss did not improve from 1.74061
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[102]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">extract_bottleneck_features</span> <span class="kn">import</span> <span class="o">*</span>
@@ -15323,7 +15595,7 @@ test_{network} = bottleneck_features['test']</code></pre>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[103]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Obtain bottleneck features from another pre-trained CNN.</span>
@@ -15357,7 +15629,7 @@ Maybe image augmentation is the key for generalization but running a data_genera
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[55]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[293]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">InputLayer</span><span class="p">,</span> <span class="n">GlobalMaxPool2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span>
@@ -15369,7 +15641,7 @@ Maybe image augmentation is the key for generalization but running a data_genera
 <span class="n">Resnet50_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">InputLayer</span><span class="p">(</span><span class="n">train_Resnet50</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
 <span class="n">Resnet50_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GlobalAveragePooling2D</span><span class="p">())</span>
 <span class="c1">#Resnet50_model.add(GlobalMaxPool2D())</span>
-<span class="c1">#Resnet50_model.add(Dropout(0.4))</span>
+<span class="c1">#Resnet50_model.add(Dropout(0.5))</span>
 
 <span class="c1">#Resnet50_model.add(InputLayer(train_Resnet50.shape[1:]))</span>
 <span class="c1">#Resnet50_model.add(Dense(2048, activation=&#39;relu&#39;))</span>
@@ -15402,13 +15674,13 @@ Maybe image augmentation is the key for generalization but running a data_genera
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Model: &#34;sequential_7&#34;
+<pre>Model: &#34;sequential_41&#34;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-global_average_pooling2d_3 ( (None, 2048)              0         
+global_average_pooling2d_26  (None, 2048)              0         
 _________________________________________________________________
-dense_8 (Dense)              (None, 133)               272517    
+dense_61 (Dense)             (None, 133)               272517    
 =================================================================
 Total params: 272,517
 Trainable params: 272,517
@@ -15430,11 +15702,11 @@ _________________________________________________________________
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[56]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[294]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Compile the model.</span>
-<span class="n">Resnet50_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<span class="n">Resnet50_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;Precision&#39;</span><span class="p">,</span> <span class="s1">&#39;Recall&#39;</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -15452,7 +15724,7 @@ _________________________________________________________________
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[57]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[295]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Train the model.</span>
@@ -15490,85 +15762,85 @@ _________________________________________________________________
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Epoch 1/20
-209/209 [==============================] - 1s 3ms/step - loss: 1.8077 - accuracy: 0.5784 - val_loss: 0.9512 - val_accuracy: 0.7138
+209/209 [==============================] - 2s 5ms/step - loss: 1.8344 - accuracy: 0.5801 - precision: 0.8802 - recall: 0.3575 - val_loss: 0.9076 - val_accuracy: 0.7365 - val_precision: 0.8663 - val_recall: 0.5976
 
-Epoch 00001: val_loss improved from inf to 0.95122, saving model to saved_models\weights.best.Resnet50.hdf5
+Epoch 00001: val_loss improved from inf to 0.90760, saving model to saved_models\weights.best.Resnet50.hdf5
 Epoch 2/20
-209/209 [==============================] - ETA: 0s - loss: 0.4071 - accuracy: 0.90 - 0s 2ms/step - loss: 0.4083 - accuracy: 0.8996 - val_loss: 0.7814 - val_accuracy: 0.7449
+209/209 [==============================] - 1s 4ms/step - loss: 0.4120 - accuracy: 0.8949 - precision: 0.9478 - recall: 0.8183 - val_loss: 0.7271 - val_accuracy: 0.7808 - val_precision: 0.8716 - val_recall: 0.6910
 
-Epoch 00002: val_loss improved from 0.95122 to 0.78139, saving model to saved_models\weights.best.Resnet50.hdf5
+Epoch 00002: val_loss improved from 0.90760 to 0.72712, saving model to saved_models\weights.best.Resnet50.hdf5
 Epoch 3/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.2023 - accuracy: 0.9618 - val_loss: 0.6400 - val_accuracy: 0.8192
+209/209 [==============================] - 1s 4ms/step - loss: 0.2087 - accuracy: 0.9609 - precision: 0.9767 - recall: 0.9268 - val_loss: 0.6369 - val_accuracy: 0.7976 - val_precision: 0.8545 - val_recall: 0.7317
 
-Epoch 00003: val_loss improved from 0.78139 to 0.63997, saving model to saved_models\weights.best.Resnet50.hdf5
+Epoch 00003: val_loss improved from 0.72712 to 0.63692, saving model to saved_models\weights.best.Resnet50.hdf5
 Epoch 4/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.1155 - accuracy: 0.9867 - val_loss: 0.6089 - val_accuracy: 0.8084
+209/209 [==============================] - 1s 4ms/step - loss: 0.1180 - accuracy: 0.9853 - precision: 0.9917 - recall: 0.9711 - val_loss: 0.6264 - val_accuracy: 0.8084 - val_precision: 0.8659 - val_recall: 0.7653
 
-Epoch 00004: val_loss improved from 0.63997 to 0.60893, saving model to saved_models\weights.best.Resnet50.hdf5
+Epoch 00004: val_loss improved from 0.63692 to 0.62635, saving model to saved_models\weights.best.Resnet50.hdf5
 Epoch 5/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0730 - accuracy: 0.9943 - val_loss: 0.5948 - val_accuracy: 0.8156
+209/209 [==============================] - 1s 4ms/step - loss: 0.0736 - accuracy: 0.9955 - precision: 0.9962 - recall: 0.9916 - val_loss: 0.5737 - val_accuracy: 0.8228 - val_precision: 0.8759 - val_recall: 0.7689
 
-Epoch 00005: val_loss improved from 0.60893 to 0.59478, saving model to saved_models\weights.best.Resnet50.hdf5
+Epoch 00005: val_loss improved from 0.62635 to 0.57367, saving model to saved_models\weights.best.Resnet50.hdf5
 Epoch 6/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0528 - accuracy: 0.9978 - val_loss: 0.5644 - val_accuracy: 0.8299
+209/209 [==============================] - 1s 4ms/step - loss: 0.0492 - accuracy: 0.9981 - precision: 0.9984 - recall: 0.9976 - val_loss: 0.5893 - val_accuracy: 0.8156 - val_precision: 0.8505 - val_recall: 0.7701
 
-Epoch 00006: val_loss improved from 0.59478 to 0.56445, saving model to saved_models\weights.best.Resnet50.hdf5
+Epoch 00006: val_loss did not improve from 0.57367
 Epoch 7/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0382 - accuracy: 0.9984 - val_loss: 0.5769 - val_accuracy: 0.8275
+209/209 [==============================] - 1s 4ms/step - loss: 0.0398 - accuracy: 0.9979 - precision: 0.9981 - recall: 0.9978 - val_loss: 0.5581 - val_accuracy: 0.8287 - val_precision: 0.8649 - val_recall: 0.7976
 
-Epoch 00007: val_loss did not improve from 0.56445
+Epoch 00007: val_loss improved from 0.57367 to 0.55806, saving model to saved_models\weights.best.Resnet50.hdf5
 Epoch 8/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0318 - accuracy: 0.9981 - val_loss: 0.5843 - val_accuracy: 0.8359
+209/209 [==============================] - 1s 4ms/step - loss: 0.0312 - accuracy: 0.9982 - precision: 0.9982 - recall: 0.9981 - val_loss: 0.5756 - val_accuracy: 0.8335 - val_precision: 0.8678 - val_recall: 0.7940
 
-Epoch 00008: val_loss did not improve from 0.56445
+Epoch 00008: val_loss did not improve from 0.55806
 Epoch 9/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0266 - accuracy: 0.9979 - val_loss: 0.5774 - val_accuracy: 0.8287
+209/209 [==============================] - 1s 4ms/step - loss: 0.0271 - accuracy: 0.9984 - precision: 0.9984 - recall: 0.9984 - val_loss: 0.5570 - val_accuracy: 0.8335 - val_precision: 0.8669 - val_recall: 0.8036
 
-Epoch 00009: val_loss did not improve from 0.56445
+Epoch 00009: val_loss improved from 0.55806 to 0.55699, saving model to saved_models\weights.best.Resnet50.hdf5
 Epoch 10/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0240 - accuracy: 0.9984 - val_loss: 0.5685 - val_accuracy: 0.8359
+209/209 [==============================] - 1s 4ms/step - loss: 0.0234 - accuracy: 0.9976 - precision: 0.9978 - recall: 0.9976 - val_loss: 0.5679 - val_accuracy: 0.8371 - val_precision: 0.8712 - val_recall: 0.8180
 
-Epoch 00010: val_loss did not improve from 0.56445
+Epoch 00010: val_loss did not improve from 0.55699
 Epoch 11/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0205 - accuracy: 0.9979 - val_loss: 0.5600 - val_accuracy: 0.8419
+209/209 [==============================] - 1s 4ms/step - loss: 0.0201 - accuracy: 0.9984 - precision: 0.9987 - recall: 0.9984 - val_loss: 0.5624 - val_accuracy: 0.8287 - val_precision: 0.8586 - val_recall: 0.8000
 
-Epoch 00011: val_loss improved from 0.56445 to 0.56000, saving model to saved_models\weights.best.Resnet50.hdf5
+Epoch 00011: val_loss did not improve from 0.55699
 Epoch 12/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0193 - accuracy: 0.9978 - val_loss: 0.6131 - val_accuracy: 0.8228
+209/209 [==============================] - 1s 4ms/step - loss: 0.0180 - accuracy: 0.9981 - precision: 0.9982 - recall: 0.9979 - val_loss: 0.6111 - val_accuracy: 0.8275 - val_precision: 0.8555 - val_recall: 0.8012
 
-Epoch 00012: val_loss did not improve from 0.56000
+Epoch 00012: val_loss did not improve from 0.55699
 Epoch 13/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0177 - accuracy: 0.9976 - val_loss: 0.6027 - val_accuracy: 0.8383
+209/209 [==============================] - 1s 4ms/step - loss: 0.0209 - accuracy: 0.9967 - precision: 0.9967 - recall: 0.9967 - val_loss: 0.5980 - val_accuracy: 0.8323 - val_precision: 0.8595 - val_recall: 0.8060
 
-Epoch 00013: val_loss did not improve from 0.56000
+Epoch 00013: val_loss did not improve from 0.55699
 Epoch 14/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0145 - accuracy: 0.9982 - val_loss: 0.5807 - val_accuracy: 0.8347
+209/209 [==============================] - 1s 4ms/step - loss: 0.0168 - accuracy: 0.9975 - precision: 0.9976 - recall: 0.9975 - val_loss: 0.5793 - val_accuracy: 0.8311 - val_precision: 0.8573 - val_recall: 0.8060
 
-Epoch 00014: val_loss did not improve from 0.56000
+Epoch 00014: val_loss did not improve from 0.55699
 Epoch 15/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0159 - accuracy: 0.9978 - val_loss: 0.5997 - val_accuracy: 0.8275
+209/209 [==============================] - 1s 4ms/step - loss: 0.0136 - accuracy: 0.9978 - precision: 0.9978 - recall: 0.9978 - val_loss: 0.5943 - val_accuracy: 0.8311 - val_precision: 0.8537 - val_recall: 0.8108
 
-Epoch 00015: val_loss did not improve from 0.56000
+Epoch 00015: val_loss did not improve from 0.55699
 Epoch 16/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0144 - accuracy: 0.9976 - val_loss: 0.6107 - val_accuracy: 0.8371
+209/209 [==============================] - 1s 4ms/step - loss: 0.0149 - accuracy: 0.9976 - precision: 0.9976 - recall: 0.9976 - val_loss: 0.6180 - val_accuracy: 0.8299 - val_precision: 0.8586 - val_recall: 0.8072
 
-Epoch 00016: val_loss did not improve from 0.56000
+Epoch 00016: val_loss did not improve from 0.55699
 Epoch 17/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0160 - accuracy: 0.9963 - val_loss: 0.5896 - val_accuracy: 0.8359
+209/209 [==============================] - 1s 4ms/step - loss: 0.0141 - accuracy: 0.9976 - precision: 0.9976 - recall: 0.9975 - val_loss: 0.5996 - val_accuracy: 0.8323 - val_precision: 0.8579 - val_recall: 0.8096
 
-Epoch 00017: val_loss did not improve from 0.56000
+Epoch 00017: val_loss did not improve from 0.55699
 Epoch 18/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0148 - accuracy: 0.9966 - val_loss: 0.5988 - val_accuracy: 0.8335
+209/209 [==============================] - 1s 4ms/step - loss: 0.0102 - accuracy: 0.9984 - precision: 0.9984 - recall: 0.9984 - val_loss: 0.6126 - val_accuracy: 0.8299 - val_precision: 0.8545 - val_recall: 0.8156
 
-Epoch 00018: val_loss did not improve from 0.56000
+Epoch 00018: val_loss did not improve from 0.55699
 Epoch 19/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0101 - accuracy: 0.9979 - val_loss: 0.5990 - val_accuracy: 0.8431
+209/209 [==============================] - 1s 4ms/step - loss: 0.0113 - accuracy: 0.9979 - precision: 0.9979 - recall: 0.9979 - val_loss: 0.7078 - val_accuracy: 0.8180 - val_precision: 0.8418 - val_recall: 0.7964
 
-Epoch 00019: val_loss did not improve from 0.56000
+Epoch 00019: val_loss did not improve from 0.55699
 Epoch 20/20
-209/209 [==============================] - 0s 2ms/step - loss: 0.0095 - accuracy: 0.9982 - val_loss: 0.6005 - val_accuracy: 0.8371
+209/209 [==============================] - 1s 4ms/step - loss: 0.0143 - accuracy: 0.9972 - precision: 0.9972 - recall: 0.9972 - val_loss: 0.6415 - val_accuracy: 0.8251 - val_precision: 0.8521 - val_recall: 0.8072
 
-Epoch 00020: val_loss did not improve from 0.56000
+Epoch 00020: val_loss did not improve from 0.55699
 </pre>
 </div>
 </div>
@@ -15576,13 +15848,13 @@ Epoch 00020: val_loss did not improve from 0.56000
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[57]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[295]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;tensorflow.python.keras.callbacks.History at 0x26ac5bdfc10&gt;</pre>
+<pre>&lt;tensorflow.python.keras.callbacks.History at 0x296db3a1e50&gt;</pre>
 </div>
 
 </div>
@@ -15599,7 +15871,7 @@ Epoch 00020: val_loss did not improve from 0.56000
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[58]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[296]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Load the model weights with the best validation loss.</span>
@@ -15620,7 +15892,7 @@ Epoch 00020: val_loss did not improve from 0.56000
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[59]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[297]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Calculate classification accuracy on the test dataset.</span>
@@ -15647,8 +15919,123 @@ Epoch 00020: val_loss did not improve from 0.56000
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>27/27 [==============================] - 0s 596us/step
-Test accuracy: 82.89%
+<pre>27/27 [==============================] - 0s 601us/step
+Test accuracy: 84.21%
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_scoreprecision_score(np.argmax(test_targets, axis=1), np.argmax(prediction, axis=1), average=None, zero_division=0).sum()/133precision_score(np.argmax(test_targets, axis=1), np.argmax(prediction, axis=1), average='macro', zero_division=0)<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[298]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Test accuracy: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test precision: </span><span class="si">{</span><span class="n">precision_score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test recall: </span><span class="si">{</span><span class="n">recall_score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Test accuracy: 0.8421052631578947
+Test precision: 0.8598680141913224
+Test recall: 0.8283208020050125
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[305]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># weighted precision and recall</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test precision, weighted: </span><span class="si">{</span><span class="n">precision_score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test recall, weighted: </span><span class="si">{</span><span class="n">recall_score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Test precision, weighted: 0.8650172262612456
+Test recall, weighted: 0.8421052631578947
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[303]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># save Resnet50_model for later use in web app</span>
+<span class="n">Resnet50_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;saved_models/resnet50&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>INFO:tensorflow:Assets written to: saved_models/resnet50\assets
 </pre>
 </div>
 </div>
@@ -15678,7 +16065,7 @@ Test accuracy: 82.89%
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[299]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Write a function that takes a path to an image as input</span>
@@ -15741,7 +16128,7 @@ Test accuracy: 82.89%
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[300]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Write your algorithm.</span>
@@ -15756,7 +16143,7 @@ Test accuracy: 82.89%
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[301]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">determine_dog_breed</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
@@ -15811,7 +16198,7 @@ A better generalization could also be gained by improvement of dropout or regula
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[302]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## TODO: Execute your algorithm from Step 6 on</span>
@@ -15855,12 +16242,12 @@ Dog detected, according dog breed is:  Curly-coated_retriever
 
 
 Input File: Labrador_retriever_06449.jpg
-WARNING:tensorflow:5 out of the last 38 calls to &lt;function Model.make_predict_function.&lt;locals&gt;.predict_function at 0x0000026AABA3D5E0&gt; triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has experimental_relax_shapes=True option that relaxes argument shapes that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+WARNING:tensorflow:5 out of the last 38 calls to &lt;function Model.make_predict_function.&lt;locals&gt;.predict_function at 0x00000296DB2F28B0&gt; triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has experimental_relax_shapes=True option that relaxes argument shapes that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
 Dog detected, according dog breed is:  Labrador_retriever
 
 
 Input File: Labrador_retriever_06455.jpg
-WARNING:tensorflow:5 out of the last 13 calls to &lt;function Model.make_predict_function.&lt;locals&gt;.predict_function at 0x000002698D37D5E0&gt; triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has experimental_relax_shapes=True option that relaxes argument shapes that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+WARNING:tensorflow:5 out of the last 13 calls to &lt;function Model.make_predict_function.&lt;locals&gt;.predict_function at 0x00000296A81370D0&gt; triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has experimental_relax_shapes=True option that relaxes argument shapes that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
 Dog detected, according dog breed is:  Chesapeake_bay_retriever
 
 
@@ -15881,7 +16268,7 @@ Human detected, hilarious similarity with a:  Afghan_hound!
 
 
 Input File: sample_human_output.png
-Human detected, hilarious similarity with a:  Brussels_griffon!
+Human detected, hilarious similarity with a:  English_toy_spaniel!
 
 
 Input File: Welsh_springer_spaniel_08203.jpg
